@@ -1,0 +1,30 @@
+{
+  "name": "opencode-model-meter",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "OpenCode plugin for full model-price refresh, picker-row annotations, and response-speed tracking",
+  "exports": {
+    ".": "./src/server.ts",
+    "./tui": "./src/tui.tsx"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test test/*.test.ts",
+    "test:live-catalog": "node --experimental-strip-types test/live-catalog.mjs"
+  },
+  "peerDependencies": {
+    "@opencode/plugin": "2.2.5",
+    "@opentui/core": ">=0.8.0",
+    "@opentui/solid": ">=0.8.0",
+    "solid-js": ">=1.9.0"
+  },
+  "devDependencies": {
+    "@opencode/plugin": "2.2.5",
+    "@opentui/core": "^0.8.1",
+    "@opentui/solid": "^0.8.1",
+    "@types/node": "^22.19.0",
+    "solid-js": "^1.9.12",
+    "typescript": "^5.9.3"
+  }
+}
