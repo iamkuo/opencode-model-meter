@@ -133,7 +133,14 @@ export default Plugin.define({
         const runtime = toRuntimePrice(model);
         const price = resolveModelPrice(catalog, selected, [runtime]);
         const speed = rollingModelMedian(samples, model.providerID, model.id, METRIC_WINDOW);
-        const displayName = formatModelRowName(model.name, price?.input, price?.output, speed.medianTokensPerSecond, price?.tier);
+        const displayName = formatModelRowName(
+          model.name,
+          price?.input,
+          price?.output,
+          speed.medianTokensPerSecond,
+          price?.tier,
+          model.limit?.context,
+        );
         if (displayName !== model.name) {
           editor.update(model.providerID, model.id, (draft) => {
             draft.name = displayName;

@@ -17,7 +17,7 @@ This package targets the OpenCode 2.2.5 server and TUI plugin APIs. It ships two
 
 ## Model-row format
 
-The suffix is compact to fit the built-in picker: `[in$1/out$5/1M·~42t/s]`. `—t/s` means no speed sample exists yet for that exact model. Long display names are shortened to 24 characters before the suffix so price and speed remain visible on typical terminal widths. It is appended to the name, not rendered as a separate aligned column; the public plugin API does not expose a per-row model-picker renderer.
+The suffix is compact to fit the built-in picker: `[1/5/42tps/200k]` (input / output price per 1M tokens, output speed in tps, context window), with an optional `@128k` suffix when a pricing tier sits below the context window. `-tps` means no speed sample exists yet for that exact model. Long display names are shortened to 24 characters before the suffix so price and speed remain visible on typical terminal widths. It is appended to the name, not rendered as a separate aligned column; the public plugin API does not expose a per-row model-picker renderer.
 
 Runtime model prices are used first, so explicit OpenCode model configuration takes priority. When those rates are missing, exact provider/model IDs from the full Models.dev index are used. No fuzzy name matching is performed. Context-tier pricing is marked with a short `@Nk` suffix when the runtime model exposes a selected tier.
 

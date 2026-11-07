@@ -1,8 +1,7 @@
 import { Plugin } from "@opencode/plugin/tui";
 import { modelMeterRpc } from "./rpc.ts";
 import type { RefreshResult } from "./rpc.ts";
-
-const METER_MARKER = " [in";
+import { extractMeterSuffix } from "./display.ts";
 
 export default Plugin.define({
   id: "opencode-model-meter",
@@ -68,8 +67,7 @@ export default Plugin.define({
         const selected = selectedModel();
         if (!selected) return <text>Model Meter: select a model</text>;
         const info = selectedInfo();
-        const markerAt = info?.name.lastIndexOf(METER_MARKER) ?? -1;
-        const detail = markerAt >= 0 ? info!.name.slice(markerAt + 1) : "price/speed loading";
+        const detail = extractMeterSuffix(info?.name ?? "") ?? "price/speed loading";
         const model = selected.modelID.length > 18 ? `${selected.modelID.slice(0, 15)}…` : selected.modelID;
         return <text>{`Meter ${model} ${detail}${refreshing ? " · refreshing" : ""}`}</text>;
       },
