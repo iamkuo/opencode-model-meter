@@ -65,11 +65,13 @@ export default Plugin.define({
       append: "prompt.footer.status",
       render: () => {
         const selected = selectedModel();
-        if (!selected) return <text>Model Meter: select a model</text>;
+        if (!selected) return <text>meter: no model</text>;
         const info = selectedInfo();
-        const detail = extractMeterSuffix(info?.name ?? "") ?? "price/speed loading";
-        const model = selected.modelID.length > 18 ? `${selected.modelID.slice(0, 15)}…` : selected.modelID;
-        return <text>{`Meter ${model} ${detail}${refreshing ? " · refreshing" : ""}`}</text>;
+        const detail = extractMeterSuffix(info?.name ?? "");
+        // Keep this to one short token: the footer already shows the model name,
+        // and a long string wraps the status row onto a second line.
+        if (!detail) return <text>{refreshing ? "meter …" : "meter —"}</text>;
+        return <text>{`${detail}${refreshing ? " …" : ""}`}</text>;
       },
     });
 
